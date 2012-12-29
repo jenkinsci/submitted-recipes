@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipe plugin="recipe@1.0-SNAPSHOT">
+          <version>1.0</version>
+          <id>foo</id>
+          <displayName>This is the foo recipe</displayName>
+          <description>Hello</description>
+          <ingredients>
+            <job>
+              <name>ci</name>
+              <description/>
+              <definition>
+                <project>
+                  <actions/>
+                  <description/>
+                  <keepDependencies>false</keepDependencies>
+                  <properties/>
+                  <scm class="hudson.scm.NullSCM"/>
+                  <canRoam>true</canRoam>
+                  <disabled>false</disabled>
+                  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+                  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+                  <triggers class="vector"/>
+                  <concurrentBuild>false</concurrentBuild>
+                  <builders>
+                    <hudson.tasks.Shell>
+                      <command>echo hello</command>
+                    </hudson.tasks.Shell>
+                  </builders>
+                  <publishers/>
+                  <buildWrappers/>
+                </project>
+              </definition>
+            </job>
+          </ingredients>
+        <author>kohsuke</author></recipe>
