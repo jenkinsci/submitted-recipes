@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipe plugin="recipe@1.0-SNAPSHOT">
+  <id>org.jenkins-ci.recipes.core</id>
+  <version>1.0</version>
+  <displayName>Jenkins core build &amp; test</displayName>
+  <description>This recipe contains the full build and the test execution of the Jenkins core.</description>
+  <ingredients>
+    <job>
+      <name>Jenkins core</name>
+      <description/>
+      <definition>
+        <maven2-moduleset plugin="maven-plugin@1.473">
+          <actions/>
+          <description/>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.plugins.git.GitSCM" plugin="git@1.1.26">
+            <configVersion>2</configVersion>
+            <userRemoteConfigs>
+              <hudson.plugins.git.UserRemoteConfig>
+                <name/>
+                <refspec/>
+                <url>https://github.com/jenkinsci/jenkins.git</url>
+              </hudson.plugins.git.UserRemoteConfig>
+            </userRemoteConfigs>
+            <branches>
+              <hudson.plugins.git.BranchSpec>
+                <name>master</name>
+              </hudson.plugins.git.BranchSpec>
+            </branches>
+            <disableSubmodules>false</disableSubmodules>
+            <recursiveSubmodules>false</recursiveSubmodules>
+            <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+            <authorOrCommitter>false</authorOrCommitter>
+            <clean>false</clean>
+            <wipeOutWorkspace>false</wipeOutWorkspace>
+            <pruneBranches>false</pruneBranches>
+            <remotePoll>false</remotePoll>
+            <ignoreNotifyCommit>false</ignoreNotifyCommit>
+            <useShallowClone>false</useShallowClone>
+            <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+            <gitTool>Default</gitTool>
+            <submoduleCfg class="list"/>
+            <relativeTargetDir/>
+            <reference/>
+            <excludedRegions/>
+            <excludedUsers/>
+            <gitConfigName/>
+            <gitConfigEmail/>
+            <skipTag>false</skipTag>
+            <includedRegions/>
+            <scmName/>
+          </scm>
+          <canRoam>true</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers class="vector"/>
+          <concurrentBuild>false</concurrentBuild>
+          <rootModule>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>pom</artifactId>
+          </rootModule>
+          <goals>install</goals>
+          <defaultGoals>install</defaultGoals>
+          <aggregatorStyleBuild>true</aggregatorStyleBuild>
+          <incrementalBuild>false</incrementalBuild>
+          <perModuleEmail>true</perModuleEmail>
+          <ignoreUpstremChanges>false</ignoreUpstremChanges>
+          <archivingDisabled>false</archivingDisabled>
+          <resolveDependencies>false</resolveDependencies>
+          <processPlugins>false</processPlugins>
+          <mavenValidationLevel>-1</mavenValidationLevel>
+          <runHeadless>false</runHeadless>
+          <settingConfigId/>
+          <globalSettingConfigId/>
+          <reporters/>
+          <publishers/>
+          <buildWrappers/>
+          <prebuilders/>
+          <postbuilders/>
+          <runPostStepsIfResult>
+            <name>FAILURE</name>
+            <ordinal>2</ordinal>
+            <color>RED</color>
+          </runPostStepsIfResult>
+        </maven2-moduleset>
+      </definition>
+    </job>
+  </ingredients>
+<author>kohsuke</author></recipe>
