@@ -22,10 +22,10 @@
           <properties/>
           <scm class="hudson.scm.SubversionSCM" plugin="subversion@1.39">
             <locations>
-              <hudson.scm.SubversionSCM__-ModuleLocation>
+              <hudson.scm.SubversionSCM_-ModuleLocation>
                 <remote>https://svn.jenkins-ci.org/trunk/jenkins/test-projects/model-ant-project</remote>
                 <local>.</local>
-              </hudson.scm.SubversionSCM__-ModuleLocation>
+              </hudson.scm.SubversionSCM_-ModuleLocation>
             </locations>
             <excludedRegions/>
             <includedRegions/>
