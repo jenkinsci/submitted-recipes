@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipe plugin="recipe@1.1-SNAPSHOT (private-01/25/2013 13:11-kohsuke)">
+  <id>org.kohsuke.jenkins.demo</id>
+  <version>1.0</version>
+  <displayName>Jenkinsべんきょうかいデモ</displayName>
+  <description>これはデモです</description>
+  <ingredients>
+    <job>
+      <name>foo</name>
+      <description>これはrubyでビルドをする例です</description>
+      <definition>
+        <project>
+          <actions/>
+          <description/>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.scm.NullSCM"/>
+          <canRoam>true</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers class="vector"/>
+          <concurrentBuild>false</concurrentBuild>
+          <builders>
+            <hudson.tasks.Shell>
+              <command>sleep 30</command>
+            </hudson.tasks.Shell>
+          </builders>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+      </definition>
+    </job>
+  </ingredients>
+<author>kohsuke</author></recipe>
