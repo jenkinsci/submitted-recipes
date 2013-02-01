@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipe plugin="recipe@1.0">
+  <id>org.jenkins-ci.recipes.git.trigger-build-by-tag</id>
+  <version>1.0</version>
+  <displayName>Trigger Jenkins build via git tag</displayName>
+  <description>Demonstrates triggering a Jenkins build only when a specially-named git tag is pushed to the repository.</description>
+  <ingredients>
+    <job>
+      <name>build-triggered-by-git-tag</name>
+      <description>Demo job. You will need to update the git repo URL before use.</description>
+      <definition>
+        <project>
+          <actions/>
+          <description>&lt;p&gt;Demonstrates how you can automatically trigger a Jenkins job when a git tag named in a certain way is pushed to the repository.&lt;/p&gt;
+
+&lt;p&gt;In this case, a build will be triggered by any tags which start with &lt;code&gt;deploy/&lt;/code&gt;, e.g. &lt;code&gt;deploy/new-test-feature&lt;/code&gt;.&lt;br/&gt;
+  If a commit is pushed to &lt;code&gt;master&lt;/code&gt;, or any other branch or tag which doesn't match the pattern, this job won't be built.&lt;/p&gt;
+
+&lt;p&gt;This can be handy for occasional jobs which you don't want to run for every commit, e.g. deploying a release, or updating a website.&lt;/p&gt;</description>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.plugins.git.GitSCM" plugin="git@1.1.26">
+            <configVersion>2</configVersion>
+            <userRemoteConfigs>
+              <hudson.plugins.git.UserRemoteConfig>
+                <name/>
+                <refspec>+refs/tags/deploy/*:refs/remotes/origin/tags/deploy/*</refspec>
+                <url>ENTER YOUR GIT REPO URL HERE</url>
+              </hudson.plugins.git.UserRemoteConfig>
+            </userRemoteConfigs>
+            <branches>
+              <hudson.plugins.git.BranchSpec>
+                <name>*/tags/deploy/*</name>
+              </hudson.plugins.git.BranchSpec>
+            </branches>
+            <disableSubmodules>false</disableSubmodules>
+            <recursiveSubmodules>false</recursiveSubmodules>
+            <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+            <authorOrCommitter>false</authorOrCommitter>
+            <clean>false</clean>
+            <wipeOutWorkspace>false</wipeOutWorkspace>
+            <pruneBranches>false</pruneBranches>
+            <remotePoll>false</remotePoll>
+            <ignoreNotifyCommit>false</ignoreNotifyCommit>
+            <useShallowClone>false</useShallowClone>
+            <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+            <gitTool>Default</gitTool>
+            <submoduleCfg class="list"/>
+            <relativeTargetDir/>
+            <reference/>
+            <excludedRegions/>
+            <excludedUsers/>
+            <gitConfigName/>
+            <gitConfigEmail/>
+            <skipTag>false</skipTag>
+            <includedRegions/>
+            <scmName/>
+          </scm>
+          <canRoam>true</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers class="vector">
+            <hudson.triggers.SCMTrigger>
+              <spec># You should preferably set up a webhook to push new commits to Jenkins.
+# But in any case, you need to enter a value here in order to enable polling or pushing.
+# It's also a good idea to poll here occasionally anyway, in case your webhook fails.
+@hourly</spec>
+              <ignorePostCommitHooks>false</ignorePostCommitHooks>
+            </hudson.triggers.SCMTrigger>
+          </triggers>
+          <concurrentBuild>false</concurrentBuild>
+          <builders>
+            <hudson.tasks.Shell>
+              <command>echo "This build has automatically been started because somebody pushed a special tag..."</command>
+            </hudson.tasks.Shell>
+          </builders>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+      </definition>
+    </job>
+  </ingredients>
+<author>orrc</author></recipe>
