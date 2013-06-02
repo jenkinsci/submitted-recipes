@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipe plugin="recipe@1.0">
+  <id>org.jenkins-ci.recipes.plugins.parallel-test-executor.ant</id>
+  <version>1.0</version>
+  <displayName>Parallel Ant Test Execution</displayName>
+  <description>This recipe demonstrates how to use the parallel test executor plugin to execute Ant tests in parallel. Install this recipe, then build the "parallel-ant" job a few times to see the effect.</description>
+  <ingredients>
+    <job>
+      <name>ant</name>
+      <description>This is the job that actually runs a test</description>
+      <definition>
+        <project>
+          <actions/>
+          <description/>
+          <logRotator class="hudson.tasks.LogRotator">
+            <daysToKeep>-1</daysToKeep>
+            <numToKeep>20</numToKeep>
+            <artifactDaysToKeep>-1</artifactDaysToKeep>
+            <artifactNumToKeep>-1</artifactNumToKeep>
+          </logRotator>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.plugins.git.GitSCM" plugin="git@1.4.0">
+            <configVersion>2</configVersion>
+            <userRemoteConfigs>
+              <hudson.plugins.git.UserRemoteConfig>
+                <name/>
+                <refspec/>
+                <url>git@github.com:jenkinsci/parallel-test-executor-plugin-sample.git</url>
+              </hudson.plugins.git.UserRemoteConfig>
+            </userRemoteConfigs>
+            <branches>
+              <hudson.plugins.git.BranchSpec>
+                <name>**</name>
+              </hudson.plugins.git.BranchSpec>
+            </branches>
+            <disableSubmodules>false</disableSubmodules>
+            <recursiveSubmodules>false</recursiveSubmodules>
+            <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+            <authorOrCommitter>false</authorOrCommitter>
+            <clean>false</clean>
+            <wipeOutWorkspace>false</wipeOutWorkspace>
+            <pruneBranches>false</pruneBranches>
+            <remotePoll>false</remotePoll>
+            <ignoreNotifyCommit>false</ignoreNotifyCommit>
+            <useShallowClone>false</useShallowClone>
+            <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+            <gitTool>Default</gitTool>
+            <submoduleCfg class="list"/>
+            <relativeTargetDir/>
+            <reference/>
+            <excludedRegions/>
+            <excludedUsers/>
+            <gitConfigName/>
+            <gitConfigEmail/>
+            <skipTag>false</skipTag>
+            <includedRegions/>
+            <scmName/>
+          </scm>
+          <canRoam>true</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers class="vector"/>
+          <concurrentBuild>true</concurrentBuild>
+          <builders>
+            <hudson.tasks.Ant plugin="ant@1.2">
+              <targets>test</targets>
+            </hudson.tasks.Ant>
+          </builders>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+      </definition>
+    </job>
+    <job>
+      <name>parallel-ant</name>
+      <description>This jobs drives the 'ant' job and get the tests executed in parallel</description>
+      <definition>
+        <project>
+          <actions/>
+          <description/>
+          <keepDependencies>false</keepDependencies>
+          <properties/>
+          <scm class="hudson.scm.NullSCM"/>
+          <canRoam>true</canRoam>
+          <disabled>false</disabled>
+          <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+          <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+          <triggers class="vector"/>
+          <concurrentBuild>false</concurrentBuild>
+          <builders>
+            <org.jenkinsci.plugins.parallel__test__executor.ParallelTestExecutor plugin="parallel-test-executor@1.0">
+              <parallelism class="org.jenkinsci.plugins.parallel_test_executor.CountDrivenParallelism">
+                <size>4</size>
+              </parallelism>
+              <testJob>ant</testJob>
+              <patternFile>exclusions.txt</patternFile>
+              <testReportFiles>target/test-reports/</testReportFiles>
+            </org.jenkinsci.plugins.parallel__test__executor.ParallelTestExecutor>
+          </builders>
+          <publishers/>
+          <buildWrappers/>
+        </project>
+      </definition>
+    </job>
+  </ingredients>
+<author>kohsuke</author></recipe>
