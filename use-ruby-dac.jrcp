@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipe plugin="recipe@1.3-SNAPSHOT">
+  <id>use-ruby-dac</id>
+  <version>1.0</version>
+  <displayName>DEV@cloud ruby builds</displayName>
+  <description>Build ruby apps on DEV@cloud</description>
+  <ingredients/>
+<author>michaelneale</author></recipe>
